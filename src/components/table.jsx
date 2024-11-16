@@ -123,7 +123,7 @@ export default function UserTable({ searchQuery }) {
         </thead>
         <tbody>
           {filteredItems.map((user, index) => (
-            <tr key={index}>
+            <tr key={index} className={isChecked.includes(user.id) ? "selected-row" : ""}>
               <td>
                 <input
                   type="checkbox"
