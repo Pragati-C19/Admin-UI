@@ -4,7 +4,7 @@
 }
 
 thead tr {
-  background-color: #545ace;
+  background-color: #5a62ff;
   font-family: serif;
   font-size: 1.2em;
   color: white;
@@ -46,7 +46,7 @@ tbody tr:hover {
 }
 
 .save {
-  color:rgb(0, 153, 255);
+  color: rgb(0, 153, 255);
   cursor: pointer;
   font-size: 1.4em;
 }
@@ -62,7 +62,7 @@ tbody tr:hover {
   background-color: white;
   color: red;
   border: 2px solid #f44336;
-  padding: 10px 30px;
+  padding: 10px 20px;
   font-size: 16px;
   margin-top: 10px;
   margin-right: 85%;

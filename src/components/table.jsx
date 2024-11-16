@@ -4,6 +4,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "../style/table.css";
 import useTableData from "../hook/useTableData";
+import Pagination from "./pagination";
 import { MdDelete, MdOutlineCancel } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { RiSave3Fill } from "react-icons/ri";
@@ -14,10 +15,18 @@ export default function UserTable({ searchQuery }) {
   const [isChecked, setIsChecked] = useState([]); // Track selected rows
   const [editingId, setEditingId] = useState(null); // Track the row being edited
   const [tempData, setTempData] = useState({}); // Store the temporary values for editing
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 10;
+
+  // Calculate pagination details
+  const totalPages = Math.ceil(filteredItems.length / rowsPerPage);
+
+  const startIndex = (currentPage - 1) * rowsPerPage;
+  const currentRows = filteredItems.slice(startIndex, startIndex + rowsPerPage);
 
   // console.log("fn: UserTable() : filteredItems : ", filteredItems);
   // console.log("fn: UserTable() : searchQuery : ", searchQuery);
-  console.log("fn: UserTable() : isChecked : ", isChecked);
+  // console.log("fn: UserTable() : isChecked : ", isChecked);
 
   // Search the User by name, email or role
   useEffect(() => {
@@ -48,15 +57,21 @@ export default function UserTable({ searchQuery }) {
     }
   };
 
-  // Selecting all rows
+  // Selecting all rows on page
   const handleSelectAll = (e) => {
     const { checked } = e.target;
 
+    // Get the IDs of the users visible on the current page
+    const currentPageUserID = currentRows.map((user) => user.id);
+
     if (checked) {
-      const allUserIDs = filteredItems.map((user) => user.id);
-      setIsChecked(allUserIDs);
+      // Add only current page's user IDs to the selection
+      setIsChecked((item) => [...new Set([...item, ...currentPageUserID])]);
     } else {
-      setIsChecked([]);
+      // Remove current page's user IDs from the selection
+      setIsChecked((item) =>
+        item.filter((id) => !currentPageUserID.includes(id))
+      );
     }
   };
 
@@ -70,7 +85,9 @@ export default function UserTable({ searchQuery }) {
 
   // Delete Selected Rows (We are deleting row only in memory)
   const deleteSelectedRows = () => {
-    const usersAfterDeletion = users.filter((user) => !isChecked.includes(user.id));
+    const usersAfterDeletion = users.filter(
+      (user) => !isChecked.includes(user.id)
+    );
     setUsers(usersAfterDeletion);
     setIsChecked([]); // Clear selection
   };
@@ -101,7 +118,6 @@ export default function UserTable({ searchQuery }) {
     setTempData({ ...tempData, [name]: value }); // Update temp data
   };
 
-
   return (
     <>
       <table id="user-table">
@@ -112,7 +128,10 @@ export default function UserTable({ searchQuery }) {
                 type="checkbox"
                 className="checkbox-all-input"
                 onChange={handleSelectAll}
-                checked={filteredItems.length > 0 && isChecked.length === filteredItems.length}
+                checked={
+                  currentRows.length > 0 &&
+                  isChecked.length === currentRows.length
+                }
               />
             </th>
             <th>Name</th>
@@ -122,8 +141,10 @@ export default function UserTable({ searchQuery }) {
           </tr>
         </thead>
         <tbody>
-          {filteredItems.map((user, index) => (
-            <tr key={index} className={isChecked.includes(user.id) ? "selected-row" : ""}>
+          {currentRows.map((user, index) => (
+            <tr
+              key={index}
+              className={isChecked.includes(user.id) ? "selected-row" : ""}>
               <td>
                 <input
                   type="checkbox"
@@ -160,8 +181,14 @@ export default function UserTable({ searchQuery }) {
                     />
                   </td>
                   <td>
+                    {/* Save Button */}
                     <RiSave3Fill className="save" onClick={saveChanges} />
-                    <MdOutlineCancel className="cancel" onClick={cancelEditing} />
+
+                    {/* Cancel Button */}
+                    <MdOutlineCancel
+                      className="cancel"
+                      onClick={cancelEditing}
+                    />
                   </td>
                 </>
               ) : (
@@ -170,7 +197,13 @@ export default function UserTable({ searchQuery }) {
                   <td>{user.email}</td>
                   <td>{user.role}</td>
                   <td>
-                    <FaRegEdit className="edit" onClick={() => startEditing(user)} />
+                    {/* Edit Button*/}
+                    <FaRegEdit
+                      className="edit"
+                      onClick={() => startEditing(user)}
+                    />
+
+                    {/* Delete Button */}
                     <MdDelete
                       className="delete"
                       onClick={() => deleteUser(user.id)}
@@ -182,7 +215,21 @@ export default function UserTable({ searchQuery }) {
           ))}
         </tbody>
       </table>
-      <button className="delete-selected" onClick={deleteSelectedRows} disabled={!isChecked.length}>Delete Selected</button>
+
+      {/* Delete Selected Button */}
+      <button
+        className="delete-selected"
+        onClick={deleteSelectedRows}
+        disabled={!isChecked.length}>
+        Delete Selected
+      </button>
+
+      {/* Pagination */}
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
+      />
     </>
   );
 }
