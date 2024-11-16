@@ -216,20 +216,22 @@ export default function UserTable({ searchQuery }) {
         </tbody>
       </table>
 
-      {/* Delete Selected Button */}
-      <button
-        className="delete-selected"
-        onClick={deleteSelectedRows}
-        disabled={!isChecked.length}>
-        Delete Selected
-      </button>
+      <div className="table-footer">
+        {/* Delete Selected Button */}
+        <button
+          className="delete-selected"
+          onClick={deleteSelectedRows}
+          disabled={!isChecked.length}>
+          Delete Selected
+        </button>
 
-      {/* Pagination */}
-      <Pagination
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        totalPages={totalPages}
-      />
+        {/* Pagination */}
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalPages={totalPages}
+        />
+      </div>
     </>
   );
 }
