@@ -1,16 +1,36 @@
+// Table Content
+
 import React from "react";
-import SearchBar from "./search-bar";
+import { useState, useEffect } from "react";
 import "../style/table.css";
 import useTableData from "../hook/useTableData";
 import { MdDelete } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 
-export default function UserTable() {
+export default function UserTable({ searchQuery }) {
   const { users, setUsers, isLoading, error } = useTableData();
+  const [filteredItems, setFilteredItems] = useState([]);
+
+  console.log("fn: UserTable() : filteredItems : ", filteredItems);
+  console.log("fn: UserTable() : searchQuery : ", searchQuery);
+
+  // This useEffect is for Search bar user data Fetching
+  useEffect(() => {
+    if (searchQuery) {
+      const filtered = users.filter(
+        (item) =>
+          item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.role.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredItems(filtered);
+    } else {
+      setFilteredItems(users);
+    }
+  }, [searchQuery, users]);
 
   return (
     <>
-      <SearchBar />
       <table id="user-table">
         <thead>
           <tr>
@@ -28,7 +48,7 @@ export default function UserTable() {
           </tr>
         </thead>
         <tbody>
-          {users.map((user, index) => (
+          {filteredItems.map((user, index) => (
             <tr key={index}>
               <td>
                 <input
@@ -42,11 +62,11 @@ export default function UserTable() {
               <td>{user.role}</td>
               <td>
                 <FaRegEdit className="edit" />
-
                 <MdDelete className="delete" />
               </td>
             </tr>
-          ))}
+          ))
+          }
         </tbody>
       </table>
       <button className="delete-selected">Delete Selected</button>

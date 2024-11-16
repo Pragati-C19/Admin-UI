@@ -1,18 +1,31 @@
-import React from 'react'
-import "../style/search-bar.css"
-import { LiaSearchSolid } from "react-icons/lia";
+// Search Bar
 
-export default function SearchBar() {
+import React from "react";
+import { useState } from "react";
+import "../style/search-bar.css";
+
+export default function SearchBar({ setSearchQuery }) {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  console.log("fn: SearchBar() : searchTerm : ", searchTerm);
+
+  const handleSearch = () => {
+    setSearchQuery(searchTerm);
+    console.log("fn: handleSearch() : setSearchQuery : ", setSearchQuery);
+  };
+
   return (
     <>
-      {/* Search Bar */}
       <div className="px-6 mt-10">
         <input
           type="text"
           placeholder="Search by name, email or role..."
-          className="search-bar"
+          className="search-icon"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={handleSearch} // Real-Time Search Filter 
         />
       </div>
     </>
-  )
+  );
 }
