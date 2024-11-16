@@ -1,15 +1,14 @@
-// This is a App Page 
+// App Page
 
-import './App.css'
-import HomePage from './components/home'
+import "./App.css";
+import HomePage from "./components/home";
 
 function App() {
-
   return (
     <>
       <HomePage />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

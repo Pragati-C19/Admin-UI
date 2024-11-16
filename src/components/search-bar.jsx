@@ -15,14 +15,14 @@ export default function SearchBar({ setSearchQuery }) {
 
   return (
     <>
-      <div className="px-6 mt-10">
+      <div>
         <input
           type="text"
           placeholder="Search by name, email or role..."
           className="search-icon"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyDown={handleSearch} // Real-Time Search Filter 
+          onKeyDown={handleSearch} // Real-Time Search Filter
         />
       </div>
     </>
