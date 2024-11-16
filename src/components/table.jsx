@@ -4,19 +4,22 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "../style/table.css";
 import useTableData from "../hook/useTableData";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdOutlineCancel } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
+import { RiSave3Fill } from "react-icons/ri";
 
 export default function UserTable({ searchQuery }) {
-  const { users } = useTableData();
+  const { users, setUsers } = useTableData();
   const [filteredItems, setFilteredItems] = useState([]);
-  const [isChecked, setIsChecked] = useState([]);
+  const [isChecked, setIsChecked] = useState([]); // Track selected rows
+  const [editingId, setEditingId] = useState(null); // Track the row being edited
+  const [tempData, setTempData] = useState({}); // Store the temporary values for editing
 
   // console.log("fn: UserTable() : filteredItems : ", filteredItems);
   // console.log("fn: UserTable() : searchQuery : ", searchQuery);
   console.log("fn: UserTable() : isChecked : ", isChecked);
 
-  // This useEffect is for Search bar user data Fetching
+  // Search the User by name, email or role
   useEffect(() => {
     if (searchQuery) {
       const filtered = users.filter(
@@ -31,7 +34,7 @@ export default function UserTable({ searchQuery }) {
     }
   }, [searchQuery, users]);
 
-  // Handling Select specfic row logic
+  // Selecting specific row
   const handleRowCheckbox = (e) => {
     const { value, checked } = e.target;
 
@@ -45,6 +48,60 @@ export default function UserTable({ searchQuery }) {
     }
   };
 
+  // Selecting all rows
+  const handleSelectAll = (e) => {
+    const { checked } = e.target;
+
+    if (checked) {
+      const allUserIDs = filteredItems.map((user) => user.id);
+      setIsChecked(allUserIDs);
+    } else {
+      setIsChecked([]);
+    }
+  };
+
+  // Deleting specific User Data (We are deleting user only in memory)
+  const deleteUser = (userId) => {
+    const usersAfterDeletion = users.filter((user) => {
+      return user.id !== userId;
+    });
+    setUsers(usersAfterDeletion);
+  };
+
+  // Delete Selected Rows (We are deleting row only in memory)
+  const deleteSelectedRows = () => {
+    const usersAfterDeletion = users.filter((user) => !isChecked.includes(user.id));
+    setUsers(usersAfterDeletion);
+    setIsChecked([]); // Clear selection
+  };
+
+  // Start editing a row (We are editing user only in memory)
+  const startEditing = (user) => {
+    setEditingId(user.id);
+    setTempData({ ...user }); // Pre-fill the temporary data with current user data
+  };
+
+  // Save changes (We are editing user only in memory)
+  const saveChanges = () => {
+    const updatedUsers = users.map((user) =>
+      user.id === editingId ? { ...user, ...tempData } : user
+    );
+    setUsers(updatedUsers); // Update the users state
+    setEditingId(null); // Exit editing mode
+  };
+
+  // Cancel editing (We are editing user only in memory)
+  const cancelEditing = () => {
+    setEditingId(null); // Exit editing mode without saving
+  };
+
+  // Handle input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setTempData({ ...tempData, [name]: value }); // Update temp data
+  };
+
+
   return (
     <>
       <table id="user-table">
@@ -54,7 +111,8 @@ export default function UserTable({ searchQuery }) {
               <input
                 type="checkbox"
                 className="checkbox-all-input"
-                name="allSelect"
+                onChange={handleSelectAll}
+                checked={filteredItems.length > 0 && isChecked.length === filteredItems.length}
               />
             </th>
             <th>Name</th>
@@ -70,24 +128,61 @@ export default function UserTable({ searchQuery }) {
                 <input
                   type="checkbox"
                   className="checkbox-input"
-                  name="Select Data"
                   value={user.id}
-                  checked={user.isChecked}
-                  onChange={(e) => handleRowCheckbox(e)}
+                  onChange={handleRowCheckbox}
+                  checked={isChecked.includes(user.id)}
                 />
               </td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.role}</td>
-              <td>
-                <FaRegEdit className="edit" />
-                <MdDelete className="delete" />
-              </td>
+              {editingId === user.id ? (
+                <>
+                  <td>
+                    <input
+                      type="text"
+                      name="name"
+                      value={tempData.name}
+                      onChange={handleInputChange}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="email"
+                      name="email"
+                      value={tempData.email}
+                      onChange={handleInputChange}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="role"
+                      value={tempData.role}
+                      onChange={handleInputChange}
+                    />
+                  </td>
+                  <td>
+                    <RiSave3Fill className="save" onClick={saveChanges} />
+                    <MdOutlineCancel className="cancel" onClick={cancelEditing} />
+                  </td>
+                </>
+              ) : (
+                <>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.role}</td>
+                  <td>
+                    <FaRegEdit className="edit" onClick={() => startEditing(user)} />
+                    <MdDelete
+                      className="delete"
+                      onClick={() => deleteUser(user.id)}
+                    />
+                  </td>
+                </>
+              )}
             </tr>
           ))}
         </tbody>
       </table>
-      <button className="delete-selected">Delete Selected</button>
+      <button className="delete-selected" onClick={deleteSelectedRows} disabled={!isChecked.length}>Delete Selected</button>
     </>
   );
 }

@@ -41,6 +41,19 @@ tbody tr:hover {
   padding-left: 30px;
 }
 
+.save {
+  color:rgb(0, 153, 255);
+  cursor: pointer;
+  font-size: 1.4em;
+}
+
+.cancel {
+  color: rgb(92, 92, 92);
+  cursor: pointer;
+  font-size: 1.4em;
+  padding-left: 30px;
+}
+
 .delete-selected {
   background-color: white;
   color: red;
