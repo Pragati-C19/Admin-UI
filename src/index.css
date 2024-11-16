@@ -1,0 +1,40 @@
+:root {
+  font-family: serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  background-color:rgba(164, 254, 230, 0.301);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  place-items: center;
+}
+
+h1 {
+  font-size: 2.5em;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color:rgb(40, 40, 40);
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 2.5em;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #4049fd;
+  line-height: 1.1;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
