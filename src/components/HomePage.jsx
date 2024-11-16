@@ -1,10 +1,10 @@
-// HomePage
+// HomePage Component
 
 import React from "react";
 import { useState } from "react";
-import UserTable from "./table";
-import "../style/home.css";
-import SearchBar from "./search-bar";
+import UserTable from "./UserTable";
+import "../style/HomePage.css";
+import SearchBar from "./SearchBar";
 
 export default function HomePage() {
   // Query for search bar
@@ -13,10 +13,10 @@ export default function HomePage() {
   return (
     <>
       {/* Header */}
-      <div>
-        <h1>Welcome To The GreekTrust Coding Challenge</h1>
+      <header className="homepage-header">
+        <h1>Welcome To The GeekTrust Coding Challenge</h1>
         <h2>Admin UI</h2>
-      </div>
+      </header>
 
       {/* Search Bar */}
       <SearchBar setSearchQuery={setSearchQuery} />
@@ -25,10 +25,10 @@ export default function HomePage() {
       <UserTable searchQuery={searchQuery} />
 
       {/* Footer */}
-      <p className="footer">
-        GreekTrust Coding Challenge | Admin UI with 💖 Pragati Chothe @ 16th Nov
-        2024
-      </p>
+      <footer className="footer">
+        GeekTrust Coding Challenge | Admin UI with 💖 Pragati Chothe @{" "}
+        {new Date().toLocaleDateString()}
+      </footer>
     </>
   );
 }

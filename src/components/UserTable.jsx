@@ -2,9 +2,9 @@
 
 import React from "react";
 import { useState, useEffect } from "react";
-import "../style/table.css";
+import "../style/UserTable.css";
 import useTableData from "../hook/useTableData";
-import Pagination from "./pagination";
+import PaginationHandler from "./PaginationHandler";
 import { MdDelete, MdOutlineCancel } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { RiSave3Fill } from "react-icons/ri";
@@ -132,6 +132,7 @@ export default function UserTable({ searchQuery }) {
                   currentRows.length > 0 &&
                   isChecked.length === currentRows.length
                 }
+                aria-label="Select All Rows"
               />
             </th>
             <th>Name</th>
@@ -152,6 +153,7 @@ export default function UserTable({ searchQuery }) {
                   value={user.id}
                   onChange={handleRowCheckbox}
                   checked={isChecked.includes(user.id)}
+                  aria-label="Select Specific Row"
                 />
               </td>
               {editingId === user.id ? (
@@ -162,6 +164,7 @@ export default function UserTable({ searchQuery }) {
                       name="name"
                       value={tempData.name}
                       onChange={handleInputChange}
+                      aria-label="User Name"
                     />
                   </td>
                   <td>
@@ -170,6 +173,7 @@ export default function UserTable({ searchQuery }) {
                       name="email"
                       value={tempData.email}
                       onChange={handleInputChange}
+                      aria-label="User Email"
                     />
                   </td>
                   <td>
@@ -178,16 +182,18 @@ export default function UserTable({ searchQuery }) {
                       name="role"
                       value={tempData.role}
                       onChange={handleInputChange}
+                      aria-label="User Role"
                     />
                   </td>
                   <td>
                     {/* Save Button */}
-                    <RiSave3Fill className="save" onClick={saveChanges} />
+                    <RiSave3Fill className="save" onClick={saveChanges} aria-label="Save Action Button"/>
 
                     {/* Cancel Button */}
                     <MdOutlineCancel
                       className="cancel"
                       onClick={cancelEditing}
+                      aria-label="Cancel Action Button"
                     />
                   </td>
                 </>
@@ -201,12 +207,14 @@ export default function UserTable({ searchQuery }) {
                     <FaRegEdit
                       className="edit"
                       onClick={() => startEditing(user)}
+                      aria-label="Edit Action Button"
                     />
 
                     {/* Delete Button */}
                     <MdDelete
                       className="delete"
                       onClick={() => deleteUser(user.id)}
+                      aria-label="Delete Action Button"
                     />
                   </td>
                 </>
@@ -221,12 +229,13 @@ export default function UserTable({ searchQuery }) {
         <button
           className="delete-selected"
           onClick={deleteSelectedRows}
-          disabled={!isChecked.length}>
+          disabled={!isChecked.length}
+          aria-label="Delete Selected Rows">
           Delete Selected
         </button>
 
         {/* Pagination */}
-        <Pagination
+        <PaginationHandler
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           totalPages={totalPages}

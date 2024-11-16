@@ -1,7 +1,7 @@
 // App Page
 
 import "./App.css";
-import HomePage from "./components/home";
+import HomePage from "./components/HomePage";
 
 function App() {
   return (

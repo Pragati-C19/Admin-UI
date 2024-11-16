@@ -1,7 +1,7 @@
 // Pagination Handlers
 
 import React from "react";
-import "../style/pagination.css";
+import "../style/PaginationHandler.css";
 import {
   IoPlayBack,
   IoCaretBackOutline,
@@ -9,24 +9,24 @@ import {
   IoPlayForward,
 } from "react-icons/io5";
 
-export default function Pagination({
+export default function PaginationHandler({
   currentPage,
   setCurrentPage,
   totalPages,
 }) {
-  const goToFirstPage = () => setCurrentPage(1);
 
-  const goToPreviousPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  if (totalPages <= 0) return null; // Handle invalid totalPages
+
+  const goToPage = (pageNumber) => {
+    if (pageNumber >= 1 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+    }
   };
 
-  const goToNextPage = () => {
-    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-  };
-
-  const goToLastPage = () => setCurrentPage(totalPages);
-
-  const goToPage = (pageNumber) => setCurrentPage(pageNumber);
+  const goToFirstPage = () => goToPage(1);
+  const goToPreviousPage = () => goToPage(currentPage - 1);
+  const goToNextPage = () => goToPage(currentPage + 1);
+  const goToLastPage = () => goToPage(totalPages);
 
   return (
     <>
@@ -35,7 +35,8 @@ export default function Pagination({
         <button
           className="first-page"
           onClick={goToFirstPage}
-          disabled={currentPage === 1}>
+          disabled={currentPage === 1}
+          aria-label="Go to First Page">
           <IoPlayBack />
         </button>
 
@@ -43,7 +44,8 @@ export default function Pagination({
         <button
           className="previous-page"
           onClick={goToPreviousPage}
-          disabled={currentPage === 1}>
+          disabled={currentPage === 1}
+          aria-label="Go to Previous Page">
           <IoCaretBackOutline />
         </button>
 
@@ -52,7 +54,8 @@ export default function Pagination({
           <button
             key={i + 1}
             className={`page-number ${currentPage === i + 1 ? "active" : ""}`}
-            onClick={() => goToPage(i + 1)}>
+            onClick={() => goToPage(i + 1)}
+            aria-label="Go to Page Number">
             {i + 1}
           </button>
         ))}
@@ -61,7 +64,8 @@ export default function Pagination({
         <button
           className="next-page"
           onClick={goToNextPage}
-          disabled={currentPage === totalPages}>
+          disabled={currentPage === totalPages}
+          aria-label="Go to Next Page">
           <IoCaretForwardOutline />
         </button>
 
@@ -69,7 +73,8 @@ export default function Pagination({
         <button
           className="last-page"
           onClick={goToLastPage}
-          disabled={currentPage === totalPages}>
+          disabled={currentPage === totalPages}
+          aria-label="Go to Last Page">
           <IoPlayForward />
         </button>
       </div>
