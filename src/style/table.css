@@ -1,0 +1,68 @@
+#user-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead tr {
+  background-color: #545ace;
+  font-family: serif;
+  font-size: 1.2em;
+  color: white;
+}
+
+tbody tr {
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+}
+
+/* below is used for padding in a row */
+th {
+  padding: 10px;
+}
+
+td {
+  padding: 10px;
+}
+
+tbody tr:hover {
+  background-color: #e2e1e1;
+}
+
+.edit {
+  color: green;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.delete {
+  color: red;
+  cursor: pointer;
+  font-size: 1.2em;
+  padding-left: 30px;
+}
+
+.delete-selected {
+  background-color: white;
+  color: red;
+  border: 2px solid #f44336;
+  padding: 10px 30px;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-right: 85%;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+.delete-selected:hover {
+  background-color: #f44336;
+  color: white;
+  border: 2px solid #f44336;
+}
+
+.checkbox-all-input {
+  cursor: pointer;
+}
+
+.checkbox-input {
+  cursor: pointer;
+}
