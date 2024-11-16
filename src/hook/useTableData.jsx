@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 
-// Hook for fetching and managing documents
 const useTableData = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
