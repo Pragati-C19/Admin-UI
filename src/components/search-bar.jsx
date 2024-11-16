@@ -7,11 +7,10 @@ import "../style/search-bar.css";
 export default function SearchBar({ setSearchQuery }) {
   const [searchTerm, setSearchTerm] = useState("");
 
-  console.log("fn: SearchBar() : searchTerm : ", searchTerm);
+  // console.log("fn: SearchBar() : searchTerm : ", searchTerm);
 
   const handleSearch = () => {
     setSearchQuery(searchTerm);
-    console.log("fn: handleSearch() : setSearchQuery : ", setSearchQuery);
   };
 
   return (

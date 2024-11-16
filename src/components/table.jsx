@@ -8,11 +8,13 @@ import { MdDelete } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 
 export default function UserTable({ searchQuery }) {
-  const { users, setUsers, isLoading, error } = useTableData();
+  const { users } = useTableData();
   const [filteredItems, setFilteredItems] = useState([]);
+  const [isChecked, setIsChecked] = useState([]);
 
-  console.log("fn: UserTable() : filteredItems : ", filteredItems);
-  console.log("fn: UserTable() : searchQuery : ", searchQuery);
+  // console.log("fn: UserTable() : filteredItems : ", filteredItems);
+  // console.log("fn: UserTable() : searchQuery : ", searchQuery);
+  console.log("fn: UserTable() : isChecked : ", isChecked);
 
   // This useEffect is for Search bar user data Fetching
   useEffect(() => {
@@ -29,6 +31,20 @@ export default function UserTable({ searchQuery }) {
     }
   }, [searchQuery, users]);
 
+  // Handling Select specfic row logic
+  const handleRowCheckbox = (e) => {
+    const { value, checked } = e.target;
+
+    // console.log("fn: handleCheckbox() : value : ", value);
+    // console.log("fn: handleCheckbox() : checked : ", checked);
+
+    if (checked) {
+      setIsChecked([...isChecked, value]);
+    } else {
+      setIsChecked(isChecked.filter((item) => item !== value));
+    }
+  };
+
   return (
     <>
       <table id="user-table">
@@ -38,7 +54,7 @@ export default function UserTable({ searchQuery }) {
               <input
                 type="checkbox"
                 className="checkbox-all-input"
-                name="Select all Data"
+                name="allSelect"
               />
             </th>
             <th>Name</th>
@@ -55,6 +71,9 @@ export default function UserTable({ searchQuery }) {
                   type="checkbox"
                   className="checkbox-input"
                   name="Select Data"
+                  value={user.id}
+                  checked={user.isChecked}
+                  onChange={(e) => handleRowCheckbox(e)}
                 />
               </td>
               <td>{user.name}</td>
@@ -65,8 +84,7 @@ export default function UserTable({ searchQuery }) {
                 <MdDelete className="delete" />
               </td>
             </tr>
-          ))
-          }
+          ))}
         </tbody>
       </table>
       <button className="delete-selected">Delete Selected</button>

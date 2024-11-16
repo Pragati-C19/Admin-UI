@@ -13,7 +13,7 @@ const useTableData = () => {
     setLoading(true);
     try {
       const response = await fetch(`https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json`);
-      console.log("fn: fetchUserData(): response - ", response);
+      // console.log("fn: fetchUserData(): response - ", response);
 
       if (!response.ok) {
         throw new Error("Failed to fetch User Data.");
@@ -31,7 +31,7 @@ const useTableData = () => {
   };
 
   useEffect(() => {
-    fetchUserData(); // Fetch documents when the component mounts
+    fetchUserData(); // Fetch users when the component mounts
   }, []);
 
   return {
