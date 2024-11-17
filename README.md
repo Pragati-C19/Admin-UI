@@ -1,24 +1,39 @@
 # Admin UI Solution
 
 This repository contains a solution to the **GeekTrust Frontend Coding Challenge | Admin UI**. 
-
 The application provides an interface for admins to view, edit, and delete user data fetched from an external API.
 
+## Table of Contents
+- [Challenge Description](#challenge-description)
+- [My Approach](#my-approach)
+    - [Step 1: Initial Setup](#step-1-initial-setup)
+    - [Step 2: Component Development](#step-2-component-development)
+    - [Step 3: Logic Implementation](#step-3-logic-implementation)
+    - [Step 4: Header and Footer](#step-4-header-and-footer)
+- [How to Get This Code Working](#how-to-get-this-code-working)
+- [How to Test This Code](#how-to-test-this-code)
+- [Screenshots](#screenshots)
+    - [Homepage](#homepage)
+    - [Search Results](#search-results)
+    - [Checkbox Results](#checkbox-results)
+    - [Edit Action](#edit-action)
+    - [Save Action](#Save-action)
+- [Features Summary](#features-summary)
+- [Future Improvements](#future-improvements)
+- [Feedback](#feedback)
 
-## **Challenge Description**
+## Challenge Description
 
-The task was to create a simple admin UI with the following requirements:
-
-### **Features Required**
+The task was to create a simple admin UI with the following Requirements:
 
 - **Table Display**:
-   - Columns must stand out visually from the rows.
+     Columns must stand out visually from the rows.
 
 - **Search Functionality**:
-   - A search bar to filter data by any property (e.g., name, email, role).
+     A search bar to filter data by any property (e.g., name, email, role).
 
 - **Edit and Delete**:
-   - Edit and delete functionalities to manage data (in-memory changes only).
+     Edit and delete functionalities to manage data (in-memory changes only).
 
 - **Pagination**:
    - Each page displays 10 rows.
@@ -30,7 +45,7 @@ The task was to create a simple admin UI with the following requirements:
    - Delete multiple selected rows at once using a `Delete Selected` button.
 
 - **Select/Deselect All**:
-   - Checkbox in the header to select/deselect all rows on the current page.
+     Checkbox in the header to select/deselect all rows on the current page.
 
 - **Styling**:
    - Search bar placeholder should start with "Search".
@@ -38,47 +53,42 @@ The task was to create a simple admin UI with the following requirements:
    - Avoid using third-party UI libraries (e.g., Material-UI, Bootstrap).
 
 
-## **My Approach**
+## My Approach
 
 To build this solution, I broke the problem into smaller tasks and tackled them step by step. Below is a detailed breakdown of my process.
 
-### **Step 1: Initial Setup**
+### Step 1: Initial Setup
     
 - **Created a React app using Vite**:
 
    - Vite offers fast builds and a great developer experience.
-
    - Installed dependencies using:
-     
         - `npm create vite@latest .`
         - package name: `admin-ui`
         - language: `React`
         - `npm install`
-     
-----
 
-### **Step 2: Component Development**
+### Step 2: Component Development
 
 - **Custom Hook (useTableData.jsx)**:
-   - Created a `useTableData` hook to fetch user data from the API:  
+  - Created a `useTableData` hook to fetch user data from the API:  
      `https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json`.
 
 - **Homepage**:
-   - Designed a `HomePage` component as the main entry point for the app.
+     Designed a `HomePage` component as the main entry point for the app.
 
 - **User Table Component**:
    - Built a table to display user data.
    - Highlighted column headers to differentiate them from rows.
 
 - **Search Bar Component**:
-   - Added a search bar at the top of the table to filter user data.
+     Added a search bar at the top of the table to filter user data.
 
 - **Pagination UI**:
-   - Developed a pagination component with navigation buttons.
+     Developed a pagination component with navigation buttons.
 
----
 
-### **Step 3: Logic Implementation**
+### Step 3: Logic Implementation
 
 - **Pagination Logic**:
    
@@ -161,13 +171,12 @@ To build this solution, I broke the problem into smaller tasks and tackled them 
 
         ```
 
----
 
-### **Step 4: Header and Footer**
+### Step 4: Header and Footer
 - Added a header and footer for a polished look and user-friendly navigation.
 
 
-## **How to Get This Code Working**
+## How to Get This Code Working
 
 1. **Clone the Repository**:
    ```bash
@@ -187,7 +196,7 @@ To build this solution, I broke the problem into smaller tasks and tackled them 
     - Open your browser and navigate to the URL shown in the console (e.g., `http://localhost:3000`).
 
 
-## **How to Test This Code**
+## How to Test This Code
 
 - **Manual Testing**:
    - Open the application in your browser.
@@ -209,7 +218,7 @@ To build this solution, I broke the problem into smaller tasks and tackled them 
      - Test API calls and state updates.
 
 
-## **Screenshots**
+## Screenshots
 
 ### ***Homepage***
 ![Homepage UI](./public/ui/homepage-ui.png)
@@ -223,24 +232,22 @@ To build this solution, I broke the problem into smaller tasks and tackled them 
 ### ***Edit Action***
 ![Edit Button](./public/ui/edit-button.png)
 
-### ***Save Edited Data***
+### ***Save Action***
 ![Save Button](./public/ui/save-button.png)
 
 
-## **Features Summary**
+## Features Summary
 - Interactive table with edit, delete, and multi-row delete functionality.
 - Search bar to filter users dynamically.
 - Pagination with adjustable page counts.
 - Header and footer for a complete application structure.
 
 
-## **Future Improvements**
+## Future Improvements
 - Persist changes using a backend service or database.
 - Add sorting functionality for columns.
 - Improve UI/UX with animations and responsiveness.
 
 
-## **Feedback**
-If you have feedback or suggestions, feel free to create an issue or reach out to me via [LinkedIn](https://linkedin.com/in/pragati-c19).
-
-Happy coding! 🚀
+## Feedback
+If you have any feedback or suggestions, please create an issue or contact me through [LinkedIn](https://linkedin.com/in/pragati-c19).
