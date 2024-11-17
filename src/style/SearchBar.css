@@ -16,6 +16,7 @@
   gap: 0.5rem; /* Space between items */
   flex-wrap: wrap; /* Allow wrapping on smaller screens */
   box-sizing: border-box; /* Ensure padding is included in width */
+  border-radius: 18px;
 }
 
 /* Smaller adjustments for very narrow screens */

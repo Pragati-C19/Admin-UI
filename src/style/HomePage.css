@@ -31,22 +31,18 @@ footer {
 /* Common styles for h1 and h2 */
 .homepage-header h1,
 .homepage-header h2 {
-  font-weight: bold;
+  font-size: 2.5rem;
   margin: 0.5rem 0; /* Add spacing between lines */
   line-height: 1.2; /* Improve readability */
   word-wrap: break-word; /* Ensure text doesn't overflow */
 }
 
 .homepage-header h1 {
-  font-size: 2.5rem; /* Use relative units for scalable fonts */
-  font-family: Georgia, "Times New Roman", Times, serif;
   color: rgb(40, 40, 40);
 }
 
 .homepage-header h2 {
-  font-size: 2.5rem; /* Slightly smaller than h1 */
-  font-family: Georgia, "Times New Roman", Times, serif;
-  color: #5a62ff;
+  color: #202bfa;
 }
 
 /* Fluid responsiveness without multiple media queries */
@@ -76,10 +72,10 @@ footer {
   }
 
   .homepage-header h1 {
-    font-size: 1rem; /* Smaller font for mobile devices */
+    font-size: 1.5rem; /* Smaller font for mobile devices */
   }
 
   .homepage-header h2 {
-    font-size: 1rem; /* Smaller font for mobile devices */
+    font-size: 1.5rem; /* Smaller font for mobile devices */
   }
 }
