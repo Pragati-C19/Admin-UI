@@ -1,6 +1,6 @@
 // Pagination Handlers
 
-import React from "react";
+import React, { useEffect } from "react";
 import "../style/PaginationHandler.css";
 import {
   IoPlayBack,
@@ -16,6 +16,20 @@ export default function PaginationHandler({
 }) {
 
   if (totalPages <= 0) return null; // Handle invalid totalPages
+  
+  // Number of pages to display at a time
+  const pagesToShow = 3;
+
+  // Calculate the start page and end page for the current page set
+  // Adjust logic to always display the last page number in the center when possible
+  const getStartPage = () => {
+    if (currentPage === 1) return 1;
+    if (currentPage === totalPages) return Math.max(1, totalPages - pagesToShow + 1);
+    return Math.max(1, currentPage - Math.floor(pagesToShow / 2));
+  };
+
+  const startPage = getStartPage();
+  const endPage = Math.min(totalPages, startPage + pagesToShow - 1);
 
   const goToPage = (pageNumber) => {
     if (pageNumber >= 1 && pageNumber <= totalPages) {
@@ -27,6 +41,12 @@ export default function PaginationHandler({
   const goToPreviousPage = () => goToPage(currentPage - 1);
   const goToNextPage = () => goToPage(currentPage + 1);
   const goToLastPage = () => goToPage(totalPages);
+
+  // Create an array of page numbers to display (e.g., [1, 2, 3] or [2, 3, 4])
+  const pageNumbers = Array.from(
+    { length: endPage - startPage + 1 },
+    (_, i) => startPage + i
+  );
 
   return (
     <>
@@ -50,15 +70,15 @@ export default function PaginationHandler({
         </button>
 
         {/* Page Numbers */}
-        {Array.from({ length: totalPages }, (_, i) => (
-          <button
-            key={i + 1}
-            className={`page-number ${currentPage === i + 1 ? "active" : ""}`}
-            onClick={() => goToPage(i + 1)}
-            aria-label="Go to Page Number">
-            {i + 1}
-          </button>
-        ))}
+        {pageNumbers.map((page) => (
+        <button
+          key={page}
+          className={`page-number ${currentPage === page ? "active" : ""}`}
+          onClick={() => goToPage(page)}
+          aria-label={`Go to Page ${page}`}>
+          {page}
+        </button>
+      ))}
 
         {/* Next Page */}
         <button
