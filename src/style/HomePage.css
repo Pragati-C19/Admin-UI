@@ -1,3 +1,85 @@
-.footer {
-  margin: 4%;
+header,
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  flex-wrap: wrap; /* Ensures items wrap on smaller screens */
+  box-sizing: border-box; /* Ensures padding doesn't overflow */
+  width: 100%; /* Occupy the full width of the container */
+}
+
+.homepage-footer {
+  margin: 2% auto; /* Center the footer with consistent spacing */
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+/* Style for the header container */
+.homepage-header {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center align items */
+  text-align: center; /* Center text */
+  padding: 1rem; /* Add padding for spacing */
+  width: 100%; /* Make the header responsive to container width */
+  max-width: 1200px; /* Limit the width for larger screens */
+  margin: 0 auto; /* Center the header */
+  box-sizing: border-box;
+}
+
+/* Common styles for h1 and h2 */
+.homepage-header h1,
+.homepage-header h2 {
+  font-weight: bold;
+  margin: 0.5rem 0; /* Add spacing between lines */
+  line-height: 1.2; /* Improve readability */
+  word-wrap: break-word; /* Ensure text doesn't overflow */
+}
+
+.homepage-header h1 {
+  font-size: 2.5rem; /* Use relative units for scalable fonts */
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: rgb(40, 40, 40);
+}
+
+.homepage-header h2 {
+  font-size: 2.5rem; /* Slightly smaller than h1 */
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #5a62ff;
+}
+
+/* Fluid responsiveness without multiple media queries */
+@media (max-width: 768px) {
+  header,
+  footer {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    text-align: center; /* Center-align content */
+  }
+
+  .homepage-footer {
+    gap: 0rem;
+  }
+
+  .homepage-header h1 {
+    font-size: 2rem; /* Smaller font for tablets */
+  }
+
+  .homepage-header h2 {
+    font-size: 1.75rem; /* Adjust font size */
+  }
+}
+
+@media (max-width: 576px) {
+  .homepage-footer {
+    gap: 0rem;
+  }
+
+  .homepage-header h1 {
+    font-size: 1rem; /* Smaller font for mobile devices */
+  }
+
+  .homepage-header h2 {
+    font-size: 1rem; /* Smaller font for mobile devices */
+  }
 }

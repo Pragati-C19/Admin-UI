@@ -25,8 +25,9 @@ export default function HomePage() {
       <UserTable searchQuery={searchQuery} />
 
       {/* Footer */}
-      <footer className="footer">
-        GeekTrust Coding Challenge | Admin UI with 💖 Pragati Chothe @ 16-11-2024
+      <footer className="homepage-footer">
+        GeekTrust Coding Challenge | Admin UI
+        <span> 💖 Pragati Chothe @16thNov2024</span>
       </footer>
     </>
   );

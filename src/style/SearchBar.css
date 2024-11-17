@@ -3,9 +3,26 @@
   background-size: 20px 20px;
   background-position: 10px 10px;
   background-repeat: no-repeat;
-  width: 95%;
-  font-size: 16px;
-  padding: 12px 20px 12px 40px;
+
+  width: 100%; /* Use full width of the container */
+  max-width: 600px; /* Limit the maximum width for larger screens */
+  font-size: 1rem; /* Use relative units for font size */
+  padding: 0.75rem 1rem 0.75rem 2.5rem; /* Adjust padding for a consistent look */
   border: 1px solid #ddd;
-  margin-bottom: 12px;
+  margin: 0 auto 1rem; /* Center align and add spacing below */
+
+  display: flex;
+  align-items: center; /* Vertically center items */
+  gap: 0.5rem; /* Space between items */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+/* Smaller adjustments for very narrow screens */
+@media (max-width: 480px) {
+  .search-icon {
+    font-size: 0.9rem; /* Slightly smaller font size */
+    padding: 0.5rem 0.75rem 0.5rem 2rem; /* Reduce padding */
+    background-size: 15px 15px;
+  }
 }
