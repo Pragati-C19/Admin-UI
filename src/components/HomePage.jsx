@@ -26,8 +26,7 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="footer">
-        GeekTrust Coding Challenge | Admin UI with 💖 Pragati Chothe @{" "}
-        {new Date().toLocaleDateString()}
+        GeekTrust Coding Challenge | Admin UI with 💖 Pragati Chothe @ 16-11-2024
       </footer>
     </>
   );
