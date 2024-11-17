@@ -185,7 +185,7 @@ export default function UserTable({ searchQuery }) {
                       aria-label="User Role"
                     />
                   </td>
-                  <td>
+                  <td className="save-cancel-actions">
                     {/* Save Button */}
                     <RiSave3Fill className="save" onClick={saveChanges} aria-label="Save Action Button"/>
 
@@ -202,7 +202,7 @@ export default function UserTable({ searchQuery }) {
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>{user.role}</td>
-                  <td>
+                  <td className="edit-delete-actions">
                     {/* Edit Button*/}
                     <FaRegEdit
                       className="edit"

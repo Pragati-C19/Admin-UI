@@ -3,7 +3,7 @@
   justify-content: center;
   margin-top: 10px;
   gap: 10px;
-  margin-left: 17%;
+  flex-wrap: nowrap;  /* Prevent wrapping */
 }
 
 .pagination button {
@@ -32,4 +32,35 @@
   background-color: #d3d3d3; /* Grey color for disabled buttons */
   color: #999;
   cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .pagination {
+    margin-left: 10%; /* Adjust margin for medium screens */
+    gap: 8px; /* Smaller gap between buttons */
+  }
+
+  .pagination button {
+    padding: 8px 16px; /* Reduce padding for smaller screens */
+    font-size: 0.9em; /* Slightly smaller font size for buttons */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .pagination {
+    margin-left: 5%; /* Even smaller margin for smaller screens */
+    gap: 5px; /* Reduced gap between buttons */
+    flex-wrap: nowrap; /* Prevent wrapping for small screens */
+    overflow-x: auto; /* Allow horizontal scroll for overflow */
+  }
+
+  .pagination button {
+    padding: 6px 12px; /* Further reduce padding for very small screens */
+    font-size: 0.8em; /* Make text smaller for smaller screens */
+  }
+
+  .pagination {
+    overflow-x: scroll; /* Allow horizontal scrolling if necessary */
+  }
 }

@@ -15,12 +15,8 @@ tbody tr {
   background-color: rgb(255, 255, 255);
 }
 
-/* below is used for padding in a row */
-th {
-  padding: 10px;
-}
-
-td {
+/* Padding for rows */
+th, td {
   padding: 10px;
 }
 
@@ -32,30 +28,30 @@ tbody tr:hover {
   background-color: #f0f0f0; /* Light grayish background */
 }
 
+.edit, .delete, .save, .cancel {
+  display: inline-block;
+  font-size: 1.2em;
+  padding: 5px;
+  cursor: pointer;
+  margin: 0 5px; /* Space between buttons */
+}
+
 .edit {
   color: green;
-  cursor: pointer;
-  font-size: 1.2em;
 }
 
 .delete {
   color: red;
-  cursor: pointer;
-  font-size: 1.2em;
-  padding-left: 30px;
 }
 
 .save {
   color: rgb(0, 153, 255);
-  cursor: pointer;
   font-size: 1.4em;
 }
 
 .cancel {
   color: rgb(92, 92, 92);
-  cursor: pointer;
   font-size: 1.4em;
-  padding-left: 30px;
 }
 
 .delete-selected {
@@ -75,11 +71,7 @@ tbody tr:hover {
   border: 2px solid #f44336;
 }
 
-.checkbox-all-input {
-  cursor: pointer;
-}
-
-.checkbox-input {
+.checkbox-all-input, .checkbox-input {
   cursor: pointer;
 }
 
@@ -87,4 +79,45 @@ tbody tr:hover {
   display: flex;
   align-items: center;
   margin-top: 1rem;
+  justify-content: space-between; /* Ensure buttons stay on same line */
+}
+
+@media screen and (max-width: 650px) {
+  #user-table {
+    display: block;  /* Allow the table to scroll horizontally */
+    overflow-x: auto; /* Enable horizontal scrolling when the table exceeds the viewport */
+  }
+
+  thead tr {
+    font-size: 1.1rem;
+  }
+
+  .table-footer {
+    flex-direction: column; /* Stack footer buttons vertically on smaller screens */
+    margin-top: 1rem;
+  }
+
+  .delete-selected {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #user-table {
+    display: block;  /* Allow the table to scroll horizontally */
+    overflow-x: auto; /* Enable horizontal scrolling when the table exceeds the viewport */
+  }
+
+  th, td {
+    font-size: 0.9em; /* Smaller font size for better readability on small screens */
+  }
+
+  .edit, .delete, .save, .cancel {
+    font-size: 1.1em; /* Slightly reduce button font size for small screens */
+  }
+
+  .delete-selected {
+    font-size: 14px; /* Reduce the font size for the delete button */
+  }
 }
